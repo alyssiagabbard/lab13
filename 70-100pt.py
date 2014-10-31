@@ -1,7 +1,7 @@
 #########################################
-#
-#         70-100pt - Making a game
-#
+#                                       #
+#         70-100pt - Making a game      #
+#                                       #
 #########################################
 
 
@@ -19,7 +19,42 @@ player = drawpad.create_oval(390,580,410,600, fill="red")
 
 # Create your "enemies" here, before the class
 
+enemy1 = drawpad.create_rectangle(10,420,50,400, fill="purple")
+enemy1Speed = 5
 
+def enemy1Animate():
+    global enemy1Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy1)
+    if x2 > drawpad.winfo_width(): 
+        drawpad.move(enemy1,-800,0)
+    drawpad.move(enemy1,enemy1Speed,0)
+    drawpad.after(1, enemy1Animate)
+enemy1Animate()
+
+enemy2 = drawpad.create_rectangle(1,230,60,270, fill="purple")
+enemy2Speed = 8
+
+def enemy2Animate():
+    global enemy2Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy2)
+    if x2 > drawpad.winfo_width(): 
+        drawpad.move(enemy2,-800,0)
+    drawpad.move(enemy2,enemy2Speed,0)
+    drawpad.after(1,enemy2Animate)
+enemy2Animate()
+
+enemy3 = drawpad.create_rectangle(740,120,800,140, fill="purple")
+enemy3Speed = -3
+
+def enemy3Animate():
+    global enemy3Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy3)
+    if x2 < 0: 
+        drawpad.move(enemy3,800,0)
+    drawpad.move(enemy3,enemy3Speed,0)
+    drawpad.after(1,enemy3Animate)
+enemy3Animate()
+        
 class MyApp:
 	def __init__(self, parent):
        	    global drawpad
@@ -44,7 +79,7 @@ class MyApp:
        	    
        	    self.button3 = Button(self.myContainer1)
        	    self.button3.configure(text="Down", background="red")
-       	    self.button3.grid(row=1, column=3)
+       	    self.button3.grid(row=0, column=3)
        	    self.button3.bind("<Button-1>", self.button3Clicked)
        	    
        	    # No need to edit this - just includes the drawpad into our frame
@@ -68,7 +103,7 @@ class MyApp:
         def button3Clicked(self,event):
             global player
             global drawpad
-            drawpad.move(player,0,-20)	
+            drawpad.move(player,0,20)	
 		
 	def upClicked(self, event):   
 	   global oval
